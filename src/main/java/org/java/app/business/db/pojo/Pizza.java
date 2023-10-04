@@ -20,10 +20,10 @@ public class Pizza {
 	private String imageUrl;
 	
 	@Column(nullable = false)
-	private int price;
+	private float price;
 	
 	public Pizza() { }
-	public Pizza(String name, String description, String imageUrl, int price) throws Exception {
+	public Pizza(String name, String description, String imageUrl, float price) throws Exception {
 		setName(name);
 		setDescription(description);
 		setImageUrl(imageUrl);
@@ -53,10 +53,10 @@ public class Pizza {
 	public void setImageUrl(String imageUrl) {
 		this.imageUrl = imageUrl;
 	}
-	public int getPrice() {
+	public float getPrice() {
 		return price;
 	}
-	public void setPrice(int price) throws Exception {
+	public void setPrice(float price) throws Exception {
 		if (price < 0) 
 			throw new Exception("Price can't be less than zero");
 			
@@ -65,11 +65,11 @@ public class Pizza {
 	
 	@Override
 	public String toString() {
-		return "[ID]: " + getId() 
-				+ "[Name]: " + getName()
-				+ "[Description]" + getDescription()
-				+ "[Image url]: " + getImageUrl()
-				+ "[Price] : " + getPrice()/100;
+		return "[ID]: " + getId() + "\n"
+				+ "[Name]: " + getName() + "\n"
+				+ "[Description]: " + getDescription() + "\n"
+				+ "[Image url]: " + getImageUrl() + "\n"
+				+ "[Price]: " + getPrice()/100;
 	}
 	
 	
