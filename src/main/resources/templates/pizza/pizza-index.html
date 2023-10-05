@@ -1,11 +1,22 @@
 <th:block th:replace="frags :: head('Lista pizze')">
 </th:block>
 <body>
-    <main>
+    <header>
         <h1 class="text-center mb-4">Le nostre pizze</h1>
+    </header>
+    <main>
         <div class="container-fluid">
+            <div class="d-flex justify-content-center">
+                <form id="search">
+                    <div class="input-group mb-3">
+                        <input name="name" type="text" th:value="${name}" class="form-control" placeholder="Trova una pizza">
+                        <button class="btn btn-outline-secondary" type="submit">Cerca</button>
+                      </div>
+                </form>
+            </div>
+         
             <div th:if="${#lists.isEmpty(pizzas)}">
-            <h3 class="text-center">Non ci sono ancora pizze disponibili!!</h3>
+            <h3 class="text-center">Nessuna pizza trovata</h3>
             </div>
             <div th:if="${!#lists.isEmpty(pizzas)}" class="row">
                 <div 

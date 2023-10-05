@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 @RequestMapping("/pizzas")
@@ -19,10 +20,14 @@ public class PizzaController {
 	private PizzaService pizzaService;
 	
 	@GetMapping
-	public String getIndex(Model model) {
+	public String getIndex(Model model, @RequestParam(required = false) String name) {
 		
-		List<Pizza> pizzas = pizzaService.findAll();
+		List<Pizza> pizzas = name == null ?
+							 pizzaService.findAll():
+							 pizzaService.findByName(name);
+		
 		model.addAttribute("pizzas", pizzas);
+		model.addAttribute("name", name);
 		
 		return "pizza/pizza-index";
 	}
