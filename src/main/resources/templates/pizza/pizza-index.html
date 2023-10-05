@@ -2,7 +2,7 @@
 </th:block>
 <body>
     <header>
-        <h1 class="text-center mb-4">Le nostre pizze</h1>
+        <h1 class="text-center text-yellow mb-4">Le nostre pizze</h1>
     </header>
     <main>
         <div class="container-fluid">
@@ -10,13 +10,13 @@
                 <form id="search">
                     <div class="input-group mb-3">
                         <input name="name" type="text" th:value="${name}" class="form-control" placeholder="Trova una pizza">
-                        <button class="btn btn-outline-secondary" type="submit">Cerca</button>
+                        <button class="btn btn-danger" type="submit">Cerca</button>
                       </div>
                 </form>
             </div>
          
             <div th:if="${#lists.isEmpty(pizzas)}">
-            <h3 class="text-center">Nessuna pizza trovata</h3>
+            <h3 class="text-center text-yellow">Nessuna pizza trovata</h3>
             </div>
             <div th:if="${!#lists.isEmpty(pizzas)}" class="row">
                 <div 
