@@ -1,0 +1,18 @@
+<th:block th:replace="frags :: head('Lista pizze')">
+</th:block>
+<body>
+    <main>
+        <h1 class="text-center mb-3">Ecco a te, la pizza selezionata</h1>
+        <div class="container-fluid">
+            <div class="d-flex justify-content-center">
+                <div
+                th:insert="frags :: bsCard(${pizza})">
+                               <a th:replace="frags :: buttonr('Torna indietro', @{/pizzas})">aaa</a>  
+         
+                </div>
+                
+            </div>
+        </div>
+    </main> 
+</body>
+</html>
