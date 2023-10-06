@@ -56,9 +56,17 @@ public class PizzaController {
 	
 	@PostMapping("/create")
 	public String storePizza(@Valid @ModelAttribute Pizza pizza, BindingResult bindingResult, Model model) {
-		pizzaService.save(pizza);
+		if (bindingResult.hasErrors()) {
+			pizza.setPrice(pizza.getPrice() / 10000); //In caso di errore invia dato corretto indietro (vedere return*100)
+			return "pizza/pizza-create";
+		}
+		else {
+			pizzaService.save(pizza);
+			return "redirect:/pizzas";
+
+		}
 		
-		return "redirect:/pizzas";
+		
 	}
 	
 }
