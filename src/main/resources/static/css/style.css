@@ -40,3 +40,14 @@ body {
 .text-yellow {
     color:#f5ba18;
 }
+
+.my-form {
+    background-color: #ffce00;
+    border-radius: 10px;
+    border:2px white solid;
+}
+
+#add-button {
+    top: 13px;
+    right: 10px;
+}

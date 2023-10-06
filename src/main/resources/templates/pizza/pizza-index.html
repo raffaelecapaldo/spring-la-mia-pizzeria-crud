@@ -2,7 +2,10 @@
 </th:block>
 <body>
     <header>
-        <h1 class="text-center text-yellow mb-4">Le nostre pizze</h1>
+        <div class="position-relative">
+        <h1 class="text-yellow text-center">Le nostre pizze</h1>
+        <a class="btn btn-warning position-absolute" id="add-button" th:href="@{/pizzas/create}">Aggiungi una pizza</a>
+    </div>
     </header>
     <main>
         <div class="container-fluid">
@@ -28,4 +31,5 @@
         </div>
     </main> 
 </body>
+
 </html>
