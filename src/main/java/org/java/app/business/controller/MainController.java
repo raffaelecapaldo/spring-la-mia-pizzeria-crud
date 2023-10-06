@@ -9,7 +9,7 @@ public class MainController {
 
 	@RequestMapping("/")
 	@GetMapping
-	public String HomeRedirect() {
+	public String homeToPizza() {
 		return "redirect:/pizzas";
 		
 	}
