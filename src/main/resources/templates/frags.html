@@ -24,7 +24,9 @@
           <p th:if="${pizzas == null}" th:text="'Prezzo: ' + ${#numbers.formatDecimal(pizza.price/100, 0, 'COMMA', 2, 'COMMA')} + '&euro;'" class="card-text"></p>
           <a th:if="${pizzas != null}" th:href="@{/pizzas/{id}(id=*{pizza.id})}" class="btn btn-primary"><i class="fa-solid fa-eye"></i></a>
           <a th:if="${pizzas != null}" th:href="@{/pizzas/update/{id}(id=*{pizza.id})}" class="btn btn-info"><i class="fa-solid fa-pencil"></i></a>
-          <a th:if="${pizzas != null}" th:href="@{/pizzas/{id}(id=*{pizza.id})}" class="btn btn-danger"><i class="fa-regular fa-trash-can"></i></a>
+          <form class="delete-form" th:if="${pizzas != null}" th:action="@{/pizzas/delete/{id}(id=*{pizza.id})}" method="POST">
+		   <a class="btn btn-danger delete-button"><i class="fa-regular fa-trash-can"></i></a>  
+		  </form>
 
           <a th:if="${pizzas == null}" th:href="@{/pizzas}" class="btn btn-danger">Torna indietro</a>
 

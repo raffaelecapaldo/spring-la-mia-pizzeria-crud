@@ -17,6 +17,10 @@ public class PizzaService {
 		pizzaRepo.save(pizza);
 	}
 	
+	public void delete(Pizza pizza) {
+		pizzaRepo.delete(pizza);
+	}
+	
 	public List<Pizza> findAll() {
 		return pizzaRepo.findAll();
 	}
@@ -29,4 +33,5 @@ public class PizzaService {
 			
 			return pizzaRepo.findByNameContaining(name);
 		}
+
 }

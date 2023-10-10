@@ -51,3 +51,7 @@ body {
     top: 13px;
     right: 10px;
 }
+
+.delete-form {
+	display:inline-block;
+}

@@ -74,6 +74,12 @@ public class PizzaController {
 		return "pizza/pizza-create";
 	}
 	
+	@PostMapping("/delete/{id}")
+	public String deletePizza(@PathVariable int id) {
+		pizzaService.delete(pizzaService.findById(id));
+		return "redirect:/pizzas";
+	}
+	
 	private String savePizza(Pizza pizza, BindingResult bindingResult, Model model) {
 		if (bindingResult.hasErrors()) {
 			pizza.setPrice(pizza.getPrice() / 10000); //In caso di errore invia dato corretto indietro (vedere return*100)
