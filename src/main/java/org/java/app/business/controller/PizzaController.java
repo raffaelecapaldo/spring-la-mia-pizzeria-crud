@@ -56,17 +56,34 @@ public class PizzaController {
 	
 	@PostMapping("/create")
 	public String storePizza(@Valid @ModelAttribute Pizza pizza, BindingResult bindingResult, Model model) {
+		return savePizza(pizza, bindingResult, model);		
+	}
+	
+	@PostMapping("/update/{id}")
+	public String updatePizza(@Valid @ModelAttribute Pizza pizza, BindingResult bindingResult, Model model) {
+		return savePizza(pizza, bindingResult, model);		
+	}
+
+	
+	@GetMapping("/update/{id}")
+	public String getBookUpdate(@PathVariable int id, Model model) {
+		Pizza pizza = pizzaService.findById(id);
+		pizza.setPrice((pizza.getPrice() / 10000));
+		model.addAttribute("pizza", pizza);
+		
+		return "pizza/pizza-create";
+	}
+	
+	private String savePizza(Pizza pizza, BindingResult bindingResult, Model model) {
 		if (bindingResult.hasErrors()) {
 			pizza.setPrice(pizza.getPrice() / 10000); //In caso di errore invia dato corretto indietro (vedere return*100)
 			return "pizza/pizza-create";
 		}
 		else {
 			pizzaService.save(pizza);
-			return "redirect:/pizzas";
+			return "redirect:/pizzas/" + pizza.getId();
 
 		}
-		
-		
-	}
+	}}
 	
-}
+
