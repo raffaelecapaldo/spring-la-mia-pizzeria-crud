@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import jakarta.validation.Valid;
 
@@ -55,13 +56,15 @@ public class PizzaController {
 	}
 	
 	@PostMapping("/create")
-	public String storePizza(@Valid @ModelAttribute Pizza pizza, BindingResult bindingResult, Model model) {
-		return savePizza(pizza, bindingResult, model);		
+	public String storePizza(@Valid @ModelAttribute Pizza pizza, BindingResult bindingResult, Model model,
+			RedirectAttributes ra) {
+		return savePizza(pizza, bindingResult, model, ra, true);		
 	}
 	
 	@PostMapping("/update/{id}")
-	public String updatePizza(@Valid @ModelAttribute Pizza pizza, BindingResult bindingResult, Model model) {
-		return savePizza(pizza, bindingResult, model);		
+	public String updatePizza(@Valid @ModelAttribute Pizza pizza, BindingResult bindingResult, Model model,
+			RedirectAttributes ra) {
+		return savePizza(pizza, bindingResult, model, ra, false);		
 	}
 
 	
@@ -75,17 +78,24 @@ public class PizzaController {
 	}
 	
 	@PostMapping("/delete/{id}")
-	public String deletePizza(@PathVariable int id) {
-		pizzaService.delete(pizzaService.findById(id));
+	public String deletePizza(@PathVariable int id, RedirectAttributes ra) {
+		Pizza pizza = pizzaService.findById(id);
+		ra.addFlashAttribute("deleteMessage", "Pizza con ID: " + pizza.getId() + " (" + pizza.getName() + ") cancellata");
+		pizzaService.delete(pizza);
 		return "redirect:/pizzas";
 	}
 	
-	private String savePizza(Pizza pizza, BindingResult bindingResult, Model model) {
+	private String savePizza(Pizza pizza, BindingResult bindingResult, Model model, 
+			RedirectAttributes ra, boolean isNew) {
 		if (bindingResult.hasErrors()) {
 			pizza.setPrice(pizza.getPrice() / 10000); //In caso di errore invia dato corretto indietro (vedere return*100)
 			return "pizza/pizza-create";
 		}
 		else {
+			ra.addFlashAttribute("updateMessage", "Pizza " + (isNew ? 
+															"creata " :
+															"modificata ")
+														+ "correttamente!");
 			pizzaService.save(pizza);
 			return "redirect:/pizzas/" + pizza.getId();
 
