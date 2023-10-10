@@ -38,7 +38,7 @@
                           </div>
                       </div>
                       <div class="mb-3 d-flex">
-                        <button type="submit" class="btn btn-primary me-2">Aggiungi</button>
+                        <button th:text="${pizza.id < 1 ? 'Aggiungi' : 'Modifica'}" type="submit" class="btn btn-primary me-2"></button>
                         <a th:href="@{/pizzas}" class="btn btn-danger">Indietro</a>  
                       </div>
                 </form>
